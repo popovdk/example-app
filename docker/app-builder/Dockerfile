@@ -18,7 +18,8 @@ RUN apk add --no-cache --virtual .build-deps \
        rabbitmq-c \
        libzip \
        curl \
-       libzip
+       libzip \
+       fcgi
 
 RUN docker-php-ext-configure zip \
     && docker-php-ext-install \
