@@ -2,26 +2,13 @@
 
 namespace App\Package\NewsVendor;
 
-use App\Package\NewsVendor\Vendors\NewsApiOrgNewsVendor;
+use Generator;
 
-
-class NewsVendor
+interface NewsVendor
 {
-    private string $vendor;
-
-    const NEWS_API_ORG_VENDOR = 'newsapi.org';
-
-    const VENDORS = [
-        self::NEWS_API_ORG_VENDOR => NewsApiOrgNewsVendor::class
-    ];
-
-    public function __construct()
-    {
-        $this->vendor = self::NEWS_API_ORG_VENDOR;
-    }
-
-    public function getVendorInstance(): ?array
-    {
-        return self::VENDORS[$this->vendor] ?? null;
-    }
+    /**
+     * @param $q
+     * @return Generator<NewsDTO>
+     */
+    public function paginateList($q): Generator;
 }

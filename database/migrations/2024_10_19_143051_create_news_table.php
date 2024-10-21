@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->date('published_at');
             $table->string('source');
-            $table->string('preview_url')->nullable();
+            $table->text('preview_url')->nullable();
             $table->string('title');
-            $table->string('description');
-            $table->string('content');
+            $table->text('description');
+            $table->text('content');
+            $table->text('url');
             $table->timestamps();
         });
     }

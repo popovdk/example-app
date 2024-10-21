@@ -15,7 +15,8 @@ class News extends Model
         'preview_url',
         'title',
         'description',
-        'content'
+        'content',
+        'url'
     ];
 
     protected $casts = [
@@ -24,7 +25,8 @@ class News extends Model
         'preview_url' => 'string',
         'title' => 'string',
         'description' => 'string',
-        'content' => 'string'
+        'content' => 'string',
+        'url' => 'string',
     ];
 
 }
