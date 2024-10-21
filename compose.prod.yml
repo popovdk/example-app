@@ -20,6 +20,7 @@ services:
     volumes:
       - storage_data:/var/www/html/public/storage
     networks:
+      - app_network
       - app-network
     depends_on:
       - app
@@ -47,7 +48,6 @@ services:
     volumes:
       - storage_data:/var/www/html/storage/app/public
     networks:
-      - app_network
       - app-network
     depends_on:
       - db
