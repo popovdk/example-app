@@ -45,6 +45,7 @@ services:
     volumes:
       - storage_data:/var/www/html/storage/app/public
     networks:
+      - traefik
       - app-network
     depends_on:
       - db
