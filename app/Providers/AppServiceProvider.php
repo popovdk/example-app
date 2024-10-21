@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Package\NewsVendor\NewsApiOrgNewsVendor;
+use App\Package\NewsVendor\NewsVendor;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(NewsVendor::class, function (Application $app) {
+            return new NewsApiOrgNewsVendor(config('services.news_api_org.api_key'));
+        });
     }
 
     /**
