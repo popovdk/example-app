@@ -20,7 +20,6 @@ services:
     volumes:
       - storage_data:/var/www/html/public/storage
     networks:
-      - traefik
       - app-network
     depends_on:
       - app
@@ -32,7 +31,7 @@ services:
       start_period: 60s
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=app_network"
+      - "traefik.docker.network=traefik"
       - "traefik.http.routers.example-app.entrypoints=web,websecure"
       - "traefik.http.services.example-app.loadbalancer.server.port=8080"
       - "traefik.http.routers.example-app.rule=Host(`${SUBDOMAIN}.${DOMAIN_NAME}`)"
