@@ -64,11 +64,11 @@ php artisan app:import-news
 
 ## Авторизация и регистрация
 
-Использован пакет laravel/breeze
-
-
+Использован пакет laravel/breeze, подтверждение регистрации через тегерамм бот https://t.me/+6x0ZPuiuAGoyZWUy
 
 ## Локальное развертывание
+
+docker-compose.yml
 
 Создание .env файла
 ```
@@ -83,7 +83,7 @@ docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
     -w /var/www/html \
-    laravelsail/php83-composer:latest \
+    laravelsail/php82-composer:latest \
     composer install --ignore-platform-reqs
 ```
 
@@ -92,3 +92,22 @@ docker run --rm \
 sail artisan migrate
 ```
 
+## Продакшен развертывание
+
+compose.prod.yml
+
+Создать и заполнить .env
+```
+cp .env.example .env
+```
+
+
+Сборка и развертывание проекта
+```
+make up
+```
+
+Создание схемы базы данных
+```
+make migrate
+```

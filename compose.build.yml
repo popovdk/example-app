@@ -1,0 +1,10 @@
+services:
+  nginx:
+    build:
+      dockerfile: ./docker/nginx/Dockerfile
+      context: .
+    image: ${APP_NAME}-nginx
+
+  app:
+    build: ./docker/app
+    image: ${APP_NAME}-app

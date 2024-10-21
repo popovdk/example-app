@@ -39,7 +39,7 @@ return [
             'connection' => env('DB_QUEUE_CONNECTION'),
             'table' => env('DB_QUEUE_TABLE', 'jobs'),
             'queue' => env('DB_QUEUE', 'default'),
-            'retry_after' => (int) env('DB_QUEUE_RETRY_AFTER', 90),
+            'retry_after' => (int)env('DB_QUEUE_RETRY_AFTER', 90),
             'after_commit' => true,
         ],
 
@@ -47,7 +47,7 @@ return [
             'driver' => 'beanstalkd',
             'host' => env('BEANSTALKD_QUEUE_HOST', 'localhost'),
             'queue' => env('BEANSTALKD_QUEUE', 'default'),
-            'retry_after' => (int) env('BEANSTALKD_QUEUE_RETRY_AFTER', 90),
+            'retry_after' => (int)env('BEANSTALKD_QUEUE_RETRY_AFTER', 90),
             'block_for' => 0,
             'after_commit' => false,
         ],
@@ -67,10 +67,89 @@ return [
             'driver' => 'redis',
             'connection' => env('REDIS_QUEUE_CONNECTION', 'default'),
             'queue' => env('REDIS_QUEUE', 'default'),
-            'retry_after' => (int) env('REDIS_QUEUE_RETRY_AFTER', 90),
+            'retry_after' => (int)env('REDIS_QUEUE_RETRY_AFTER', 90),
             'block_for' => null,
             'after_commit' => false,
         ],
+
+        'rabbitmq' => [
+
+            'driver' => 'rabbitmq',
+
+            /*
+             * Set to "horizon" if you wish to use Laravel Horizon.
+             */
+            'worker' => env('RABBITMQ_WORKER', 'default'),
+
+            'dsn' => env('RABBITMQ_DSN', null),
+
+            /*
+             * Could be one a class that implements \Interop\Amqp\AmqpConnectionFactory for example:
+             *  - \EnqueueAmqpExt\AmqpConnectionFactory if you install enqueue/amqp-ext
+             *  - \EnqueueAmqpLib\AmqpConnectionFactory if you install enqueue/amqp-lib
+             *  - \EnqueueAmqpBunny\AmqpConnectionFactory if you install enqueue/amqp-bunny
+             */
+
+//            'factory_class' => Enqueue\AmqpLib\AmqpConnectionFactory::class,
+
+            'host' => env('RABBITMQ_HOST', '127.0.0.1'),
+            'port' => env('RABBITMQ_PORT', 5672),
+
+            'vhost' => env('RABBITMQ_VHOST', '/'),
+            'login' => env('RABBITMQ_USER', 'guest'),
+            'password' => env('RABBITMQ_PASSWORD', 'guest'),
+
+            'queue' => env('RABBITMQ_QUEUE', 'default'),
+
+            'options' => [
+
+                'exchange' => [
+
+                    'name' => env('RABBITMQ_EXCHANGE_NAME'),
+
+                    /*
+                     * Determine if exchange should be created if it does not exist.
+                     */
+
+                    'declare' => env('RABBITMQ_EXCHANGE_DECLARE', true),
+
+                    /*
+                     * Read more about possible values at https://www.rabbitmq.com/tutorials/amqp-concepts.html
+                     */
+
+//                    'type' => env('RABBITMQ_EXCHANGE_TYPE', \Interop\Amqp\AmqpTopic::TYPE_DIRECT),
+                    'passive' => env('RABBITMQ_EXCHANGE_PASSIVE', false),
+                    'durable' => env('RABBITMQ_EXCHANGE_DURABLE', true),
+                    'auto_delete' => env('RABBITMQ_EXCHANGE_AUTODELETE', false),
+                    'arguments' => env('RABBITMQ_EXCHANGE_ARGUMENTS'),
+                ],
+
+                'queue' => [
+
+                    /*
+                     * Determine if queue should be created if it does not exist.
+                     */
+
+                    'declare' => env('RABBITMQ_QUEUE_DECLARE', true),
+
+                    /*
+                     * Determine if queue should be binded to the exchange created.
+                     */
+
+                    'bind' => env('RABBITMQ_QUEUE_DECLARE_BIND', true),
+
+                    /*
+                     * Read more about possible values at https://www.rabbitmq.com/tutorials/amqp-concepts.html
+                     */
+
+                    'passive' => env('RABBITMQ_QUEUE_PASSIVE', false),
+                    'durable' => env('RABBITMQ_QUEUE_DURABLE', true),
+                    'exclusive' => env('RABBITMQ_QUEUE_EXCLUSIVE', false),
+                    'auto_delete' => env('RABBITMQ_QUEUE_AUTODELETE', false),
+                    'arguments' => env('RABBITMQ_QUEUE_ARGUMENTS'),
+                ],
+            ],
+        ]
 
     ],
 
