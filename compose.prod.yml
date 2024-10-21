@@ -3,6 +3,10 @@ version: "3.9"
 networks:
   app-network:
     driver: bridge
+  app_network:
+    name: app_network
+    external: true
+
 
 volumes:
   db_data: { }
@@ -43,6 +47,7 @@ services:
     volumes:
       - storage_data:/var/www/html/storage/app/public
     networks:
+      - app_network
       - app-network
     depends_on:
       - db
