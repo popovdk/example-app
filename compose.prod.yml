@@ -3,8 +3,8 @@ version: "3.9"
 networks:
   app-network:
     driver: bridge
-  app_network:
-    name: app_network
+  traefik:
+    name: traefik
     external: true
 
 
@@ -20,7 +20,7 @@ services:
     volumes:
       - storage_data:/var/www/html/public/storage
     networks:
-      - app_network
+      - traefik
       - app-network
     depends_on:
       - app
